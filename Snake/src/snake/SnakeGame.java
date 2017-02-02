@@ -84,7 +84,7 @@ public class SnakeGame extends JPanel implements ActionListener{
         }
          if((s.sX[0]==s.sX[l])&&( s.sY[0]==s.sY[l])){
              timer.stop();
-             JOptionPane.showMessageDialog(null,"Game over,начать заново?");
+             JOptionPane.showMessageDialog(null,"Вы проиграли,начать заново?");
              jFrame.setVisible(false);
              s.length=2;
              s.direction=0;
