@@ -5,7 +5,7 @@ import Snake.SnakeGame;
 public class Snake {
 
     public int length = 2;
-    public int direction = 1;
+    public int direction = 0;
 
     public int sX[]= new int[400];
     public int sY[]= new int[400];
