@@ -5,7 +5,7 @@ import Snake.SnakeGame;
 
 public class Apple {
     
-    //SnakeGame main;
+    
     public int posX;
     public int posY;
     public Apple(int x, int y){
