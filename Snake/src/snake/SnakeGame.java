@@ -1,4 +1,4 @@
-package Snake;
+package snake;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javafx.scene.layout.Border;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,15 +14,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
-import javax.swing.UIManager;
 import javax.swing.WindowConstants;
-import snake.objects.Apple;
-import snake.objects.Snake;
 
 public class SnakeGame extends JPanel implements ActionListener {
 
     public static JFrame jFrame;
-    public static JLabel jLabel; 
+    public static JLabel jLabel;
     public static final int SCALE = 32;
     public static final int WIDTH = 20;
     public static final int HEIGHT = 20;
@@ -42,7 +38,8 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     public void paint(Graphics g) {
         g.setColor(Color.darkGray);
-        g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);        
+        g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
+
         g.setColor(Color.red);
         g.fillOval(apple.posX * SCALE + 4, apple.posY * SCALE + 4, SCALE - 8, SCALE - 8);
 
@@ -58,10 +55,10 @@ public class SnakeGame extends JPanel implements ActionListener {
     public static void main(String[] args) {
         jFrame = new JFrame("Game Snake");
         jLabel = new JLabel("Score:2");
-        jFrame.add(jLabel, BorderLayout.AFTER_LAST_LINE); 
+        jFrame.add(jLabel, BorderLayout.AFTER_LAST_LINE);
         jFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         jFrame.setResizable(false);
-        jFrame.setSize(WIDTH * SCALE + 6, HEIGHT * SCALE +29);
+        jFrame.setSize(WIDTH * SCALE + 6, HEIGHT * SCALE + 45);
         jFrame.setLocationRelativeTo(null);
         jFrame.add(new SnakeGame());
         jFrame.setVisible(true);
@@ -74,8 +71,8 @@ public class SnakeGame extends JPanel implements ActionListener {
         if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {
             apple.setRandomPosition();
             s.length++;
-           jLabel.setText("Score:"+s.length);
-            
+            jLabel.setText("Score:" + s.length);
+
         }
         for (int l = 1; l < s.length; l++) {
             if ((s.sX[l] == apple.posX) && (s.sY[l] == apple.posY)) {
