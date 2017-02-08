@@ -27,7 +27,7 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     Snake s = new Snake(10, 10, 10, 10);
     Apple apple = new Apple(Math.abs((int) (Math.random() * SnakeGame.HEIGHT - 1)), Math.abs((int) (Math.random() * SnakeGame.HEIGHT - 1)));
-
+    Poison poison = new Poison(Math.abs((int) (Math.random() * SnakeGame.HEIGHT - 1)), Math.abs((int) (Math.random() * SnakeGame.HEIGHT - 1)));
     Timer timer = new Timer(1000 / SPEED, this);
 
     public SnakeGame() {
@@ -42,6 +42,8 @@ public class SnakeGame extends JPanel implements ActionListener {
 
         g.setColor(Color.red);
         g.fillOval(apple.posX * SCALE + 4, apple.posY * SCALE + 4, SCALE - 8, SCALE - 8);
+         g.setColor(Color.blue);
+        g.fillOval(poison.posB * SCALE + 4, poison.posC * SCALE + 4, SCALE - 8, SCALE - 8);
 
         for (int l = 1; l < s.length; l++) {
             g.setColor(Color.green);
@@ -71,6 +73,30 @@ public class SnakeGame extends JPanel implements ActionListener {
         if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {
             apple.setRandomPosition();
             s.length++;
+            jLabel.setText("Score:" + s.length);
+
+        }
+        if ((s.sX[0] == poison.posB) && (s.sY[0] == poison.posC)) {
+            poison.setRandomPosition();
+            s.length--;
+            if(s.length<=1){
+                int reply = JOptionPane.showConfirmDialog(null, "Выйти?", "Game Over", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    System.exit(0);
+
+                } else {
+                    jFrame.setVisible(false);
+                    s.length = 2;
+                    s.direction = 0;
+                    apple.setRandomPosition();
+                    jFrame.setVisible(true);
+                    timer.start();
+                }
+
+            }
+                
+            
+            
             jLabel.setText("Score:" + s.length);
 
         }
