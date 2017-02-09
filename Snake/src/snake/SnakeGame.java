@@ -23,7 +23,7 @@ public class SnakeGame extends JPanel implements ActionListener {
     public static final int SCALE = 32;
     public static final int WIDTH = 20;
     public static final int HEIGHT = 20;
-    public static int SPEED = 6;
+    public static int SPEED = 5;
 
     Snake s = new Snake(10, 10, 10, 10);
     Apple apple = new Apple(Math.abs((int) (Math.random() * SnakeGame.HEIGHT - 1)), Math.abs((int) (Math.random() * SnakeGame.HEIGHT - 1)));
@@ -40,10 +40,10 @@ public class SnakeGame extends JPanel implements ActionListener {
         g.setColor(Color.darkGray);
         g.fillRect(0, 0, WIDTH * SCALE, HEIGHT * SCALE);
 
-        g.setColor(Color.red);
+        g.setColor(Color.red);//яблоко
         g.fillOval(apple.posX * SCALE + 4, apple.posY * SCALE + 4, SCALE - 8, SCALE - 8);
-         g.setColor(Color.blue);
-        g.fillOval(poison.posB * SCALE + 4, poison.posC * SCALE + 4, SCALE - 8, SCALE - 8);
+        g.setColor(Color.blue);//плохое яблоко
+        g.fillOval(poison.posQ * SCALE + 4, poison.posW * SCALE + 4, SCALE - 8, SCALE - 8);
 
         for (int l = 1; l < s.length; l++) {
             g.setColor(Color.green);
@@ -69,34 +69,11 @@ public class SnakeGame extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         s.move();
+        //poison.setRandomPosition();
 
-        if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {
+        if ((s.sX[0] == apple.posX) && (s.sY[0] == apple.posY)) {//apple
             apple.setRandomPosition();
             s.length++;
-            jLabel.setText("Score:" + s.length);
-
-        }
-        if ((s.sX[0] == poison.posB) && (s.sY[0] == poison.posC)) {
-            poison.setRandomPosition();
-            s.length--;
-            if(s.length<=1){
-                int reply = JOptionPane.showConfirmDialog(null, "Выйти?", "Game Over", JOptionPane.YES_NO_OPTION);
-                if (reply == JOptionPane.YES_OPTION) {
-                    System.exit(0);
-
-                } else {
-                    jFrame.setVisible(false);
-                    s.length = 2;
-                    s.direction = 0;
-                    apple.setRandomPosition();
-                    jFrame.setVisible(true);
-                    timer.start();
-                }
-
-            }
-                
-            
-            
             jLabel.setText("Score:" + s.length);
 
         }
@@ -119,9 +96,29 @@ public class SnakeGame extends JPanel implements ActionListener {
                     jFrame.setVisible(true);
                     timer.start();
                 }
+            }
+        }
+        if ((s.sX[0] == poison.posQ) && (s.sY[0] == poison.posW)) {//blue apple
+            poison.setRandomPosition();
+            s.length-=4;
+             
+            
+            if (s.length <= 1) {
+                int reply = JOptionPane.showConfirmDialog(null, "Выйти?", "Game Over", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    System.exit(0);
 
+                } else {
+                    jFrame.setVisible(false);
+                    s.length = 2;
+                    s.direction = 0;
+                    apple.setRandomPosition();
+                    jFrame.setVisible(true);
+                    timer.start();
+                }
             }
 
+            jLabel.setText("Score:" + s.length);
         }
 
         repaint();
